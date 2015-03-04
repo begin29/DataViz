@@ -32,3 +32,19 @@ The interesting columns are:
     (4) - Build final status
     (5) - Build overall duration, in seconds
 
+## Solution:
+
+Only copy this repository and open `index.html` file. Then open session_history.csv via index page.
+
+### Ubnormal calculates
+I have calculated `middle value` for all falls and found `abnormal falls` dates.
+`Middle value` calculated by formula:
+
+~~~
+MV = (summ for all fails per each day)/(count of all fails day)
+~~~
+e.g. I have 10-01-2015 : 10 fails; 11-01-2015 : 3 fails;
+MV = 13/2 ~ 8;
+
+Then ubnormal here are values than fails count is more than `middle value`.
+`10-01-2015` is ubnormal fails day for my example.

@@ -71,7 +71,7 @@ $(document).ready(function() {
     return el > this[0];
   };
 
-  function calculatePassedAndFailed(date_arr, possible_val_arr, prepared_array){
+  function calculateStateCountPerDay(date_arr, possible_val_arr, prepared_array){
     var common_hash = {};
     //date_arr => [date1, date2, ...] uniq
     //prepared_array => [[date1, status], [date2, status2], [date1, status2], ...]
@@ -123,7 +123,7 @@ $(document).ready(function() {
     };
     date_array = $.unique(date_array);
 
-    var calculated_data = calculatePassedAndFailed(date_array, statusList, prepared_array);
+    var calculated_data = calculateStateCountPerDay(date_array, statusList, prepared_array);
     calculated_data.unshift(['Data', 'Passed', 'Failed']);
     var data = new google.visualization.arrayToDataTable(calculated_data);
 
@@ -205,7 +205,7 @@ $(document).ready(function() {
 
     };
 
-    var calculated_data = calculatePassedAndFailed(date_array, statusList, prepared_array);
+    var calculated_data = calculateStateCountPerDay(date_array, statusList, prepared_array);
     var summ = 0;
     var middle_value = 0;
     calculated_data.forEach(function(element){
