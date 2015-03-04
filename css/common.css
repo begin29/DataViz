@@ -1,0 +1,6 @@
+.linechart-select, .table-wrapper{ display: none;}
+.first_block{float: left; width: 50%;}
+.next-block{float: right; width: 50%;}
+.table-wrapper{width: 100%;
+  text-align: -webkit-center;
+  margin-top: 420px;}
