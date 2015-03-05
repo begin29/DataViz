@@ -141,7 +141,6 @@ $(document).ready(function() {
 
   function drawLineChart(result_data, value_index){
     var prepared_array = [];
-    var date_array = [];
 
     var statusList = ['passed'];
     result_data = result_data.filter(filterByStatus, [statusList, value_index]);
@@ -150,42 +149,23 @@ $(document).ready(function() {
       if(result_data[i].slice(2,5).length > 0){
         var temp_array = result_data[i].slice(2,5);
         temp_array.splice(1, 1);
-        date_array.push(temp_array[0].substring(0,10));
         temp_array[1] = parseFloat(temp_array[1]);
         prepared_array.push(temp_array);
       };
     };
-    date_array = $.unique(date_array);
 
-    var selectbox = $('.linechart-select');
+    prepared_array.unshift(['Data', 'Duration']);
+    var data = new google.visualization.arrayToDataTable(prepared_array);
 
-    date_array.forEach(function(e){
-      var o = new Option(e, e);
-      selectbox.append(o);
-    });
+    var options = {
+      title: "Build duration",
+      width: 1300,
+      height: 500,
+      bar: {groupWidth: "95%"}
+    };
 
-    selectbox.show();
-
-    selectbox.on('change', function(){
-      if($(this).val() != ''){
-        var selected_date = $(this).val();
-        var duration_index = 0;
-        var filtered_data = prepared_array.filter(filterByDate, [selected_date, duration_index]);
-
-        filtered_data.unshift(['Data', 'Duration']);
-        var data = new google.visualization.arrayToDataTable(filtered_data);
-
-        var options = {
-          title: "Build duration",
-          width: 600,
-          height: 400,
-          bar: {groupWidth: "95%"}
-        };
-
-        var chart = new google.visualization.LineChart( $('.line-block')[0] );
-        chart.draw(data, options);
-      };
-    });
+    var chart = new google.visualization.LineChart( $('.line-block')[0] );
+    chart.draw(data, options);
   };
 
   function calculateAbnormalFallDates(result_data, value_index){
@@ -225,7 +205,7 @@ $(document).ready(function() {
       options: {
         title: 'Abnormal fails',
         view: {'columns': [0,1]},
-        width: '500px',
+        width: '300px',
         height:'100px'
       }
     })
